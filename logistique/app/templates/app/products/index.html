@@ -1,0 +1,61 @@
+{% extends 'app/layouts/defaults.html' %}
+{% block content %}
+
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item active">Equipement</li>
+      </ol>
+    </nav>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">    
+    {% if messages %}
+        
+        {% for message in messages  %}
+            <p class="alert alert-info">
+        {% endfor %}
+            
+    {% endif %}
+    <div class="container-fluid">
+        <a href="{% url 'products_create' %} " class="btn btn-primary">Nouveau</a>
+        <br><br>
+        <div class="table-responsive">
+            <table class="table table-bordered table-stripped">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th> Categories</th>
+                    <th> Equipement </th>
+                    <th> Marque </th>
+                    <th> Performance </th>
+                    <th> Options </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }} </td>
+                        <td>{{product.category}} </td>
+                        <td>{{product.product_name}} </td>
+                        <td>{{product.marque}} </td>
+                        <td>{{product.performance}} </td>  
+                        <td>
+                            <div class="card-footer">
+                                <a href="{% url 'products_edit' product.id %}"class="btn btn-primary">Edit</a>
+                                <form action="{% url 'products_delete' product.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" onclick="return confirm('Ushaka kuyifuta??')"
+                                        class="btn btn-danger btn-sm"> Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock  %}

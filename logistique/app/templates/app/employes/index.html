@@ -1,0 +1,60 @@
+{% extends 'app/layouts/defaults.html' %}
+{% block content %}
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item active">Employes</li>
+      </ol>
+    </nav>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    
+    {% if messages %}
+        
+        {% for message in messages  %}
+            <p class="alert alert-info">
+        {% endfor %}
+            
+    {% endif %}
+        
+    
+
+    <div class="container-fluid">
+        <a href="{% url 'employes_add' %} " class="btn btn-primary">Nouveau</a>
+        <br><br>
+        <div class="table-responsive">
+            <table class="table table-bordered table-stripped">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th> Options </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employe in employes %}
+                    <tr>
+                        <td>{{employe.id }} </td>
+                        <td>{{employe.nom}} </td>  
+                        <td>{{employe.prenom}} </td>
+                        <td>
+                            <div class="card-footer">
+                                <a href="{% url 'employes_edit' employe.id %}"class="btn btn-primary">Edit</a>
+                                <form action="{% url 'employes_delete' employe.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" onclick="return confirm('Ushaka kuyifuta??')"
+                                        class="btn btn-danger btn-sm"> Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock  %}

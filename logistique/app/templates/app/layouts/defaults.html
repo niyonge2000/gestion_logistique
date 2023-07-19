@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'app/partials/head.html' %}
+
+<body>
+
+  <!-- ======= Header ======= -->
+  {% include 'app/partials/nav.html' %}
+  <!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'app/partials/sidebar.html' %}
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <!-- End Page Title -->
+    <!--Content-->
+    
+    {% block content %}
+        
+    {% endblock  %}
+        
+    <!--End Content -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'app/partials/footer.html' %}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  {% include 'app/partials/js.html' %}
+
+</body>
+
+</html>
